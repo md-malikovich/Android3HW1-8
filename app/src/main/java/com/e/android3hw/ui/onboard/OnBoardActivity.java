@@ -57,5 +57,3 @@ public class OnBoardActivity extends AppCompatActivity {
         context.startActivity(new Intent(context, OnBoardActivity.class));
     }
 }
-//Дизайн скинет преподователь из Фигмы
-//Онборард - скип в верхнем правом углу (меню - ifroom)
