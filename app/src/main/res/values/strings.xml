@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Android3HW</string>
     <string name="hello_this_is_mainActivity">Hello! This is MainActivity!</string>
+    <string name="from">from</string>
+    <string name="malikovich">MALIKOVICH</string>
+    <string name="btn_menu_skip">SKIP</string>
 </resources>
