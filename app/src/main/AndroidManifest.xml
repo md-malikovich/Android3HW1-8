@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/kompanion"
         android:supportsRtl="true"
+        android:name=".MyApp"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.onboard.OnBoardActivity"></activity>
