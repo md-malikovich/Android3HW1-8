@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Splash"
-            android:screenOrientation="portrait"></activity>
-
+        <activity android:name=".ui.onboard.OnBoardActivity"></activity>
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android3HW</string>
+    <string name="hello_this_is_mainActivity">Hello! This is MainActivity!</string>
 </resources>
