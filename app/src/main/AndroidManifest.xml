@@ -12,18 +12,25 @@
         android:name=".MyApp"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.onboard.OnBoardActivity"></activity>
+
+        <activity android:name=".ui.onboard.OnBoardActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash" />
-        <activity android:name=".ui.main.MainActivity">
+            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask">
+        </activity>
+
     </application>
 
 </manifest>

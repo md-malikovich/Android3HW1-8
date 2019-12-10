@@ -1,32 +1,36 @@
 package com.e.android3hw.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+
 import com.e.android3hw.R;
+import com.e.android3hw.data.PreferenceHelper;
 import com.e.android3hw.ui.main.MainActivity;
 import com.e.android3hw.ui.onboard.OnBoardActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private Boolean isShown = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        selectActivity();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                selectActivity();
+            }
+        }, 1_000);
     }
 
     private void selectActivity() {
-        SharedPreferences preferences = getSharedPreferences("pref", MODE_PRIVATE);
-        isShown = preferences.getBoolean("isFirstLaunch", false);
-
-        if(isShown) {
+        if(PreferenceHelper.getIsFirstLaunch()) {
             MainActivity.start(this);
         } else {
-            preferences.edit().putBoolean("isFirstLaunch", true).apply();
+            PreferenceHelper.setIsFirstLaunch();
             OnBoardActivity.start(this);
         }
+        finish();
     }
 }
