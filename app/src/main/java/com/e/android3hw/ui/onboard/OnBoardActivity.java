@@ -21,7 +21,7 @@ public class OnBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ViewPager viewPager;
-    OnBoardAdapter adapter;
+    private OnBoardAdapter adapter;
     private Button btnNext;
     private Button btnBack;
 
