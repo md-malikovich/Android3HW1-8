@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.e.android3hw.R;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

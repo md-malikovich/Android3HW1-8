@@ -4,4 +4,7 @@
     <string name="from">from</string>
     <string name="malikovich">MALIKOVICH</string>
     <string name="btn_menu_skip">SKIP</string>
+    <string name="btn_onBoard_next">NEXT</string>
+    <string name="bank_kompanion">Bank Kompanion</string>
+    <string name="btn_back">BACK</string>
 </resources>

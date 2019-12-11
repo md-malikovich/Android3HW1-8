@@ -3,8 +3,6 @@ package com.e.android3hw.ui.splash;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
-
 import com.e.android3hw.R;
 import com.e.android3hw.data.PreferenceHelper;
 import com.e.android3hw.ui.main.MainActivity;

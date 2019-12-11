@@ -3,20 +3,27 @@ package com.e.android3hw.ui.onboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
 import com.e.android3hw.R;
+import com.e.android3hw.data.entity.OnBoardEntity;
 import com.e.android3hw.ui.main.MainActivity;
+import java.util.ArrayList;
 
 public class OnBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private ViewPager viewPager;
+    OnBoardAdapter adapter;
+    private Button btnNext;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +31,46 @@ public class OnBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_on_board);
         initViews();
         initListeners();
+        setupViewPager();
     }
 
     private void initViews() {
         toolbar = findViewById(R.id.appBar);
         setSupportActionBar(toolbar);
+        viewPager = findViewById(R.id.viewPager);
+        btnNext = findViewById(R.id.btnNext);
+        btnBack = findViewById(R.id.btnBack);
     }
 
     private void initListeners() {
-        //
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1, true);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1, true);
+            }
+        });
+    }
+
+    private void setupViewPager(){
+        adapter = new OnBoardAdapter(getResource());
+        viewPager.setAdapter(adapter);
+    }
+
+    private ArrayList<OnBoardEntity> getResource(){
+        ArrayList<OnBoardEntity> list = new ArrayList<>();
+        list.add(new OnBoardEntity( "Deposits",R.drawable.bank1));
+        list.add(new OnBoardEntity( "Money transfers",R.drawable.bank3));
+        list.add(new OnBoardEntity( "Deposits",R.drawable.bank1));
+        list.add(new OnBoardEntity( "Money transfers",R.drawable.bank3));
+        list.add(new OnBoardEntity( "Deposits",R.drawable.bank1));
+        return list;
     }
 
     @Override
