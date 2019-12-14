@@ -7,4 +7,5 @@
     <string name="btn_onBoard_next">NEXT</string>
     <string name="bank_kompanion">Bank Kompanion</string>
     <string name="btn_back">BACK</string>
+    <string name="weather_key">4d63c1acf9a085448b23971128e5eddd</string>
 </resources>

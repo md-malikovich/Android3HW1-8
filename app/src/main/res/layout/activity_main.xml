@@ -5,64 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30sp"
+    android:background="@color/colorWhite"
     tools:context=".ui.main.MainActivity">
 
-    <ImageView
-    android:id="@+id/image_one"
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:src="@drawable/bank1"
-    android:paddingTop="30sp"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/image_two"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/bank3"
-        android:paddingTop="30sp"
-        app:layout_constraintLeft_toRightOf="@+id/image_one"
+    <TextView
+        android:id="@+id/textView_main"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/text_height50"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/image_three"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/bank4"
-        android:paddingTop="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_one" />
-
-    <ImageView
-        android:id="@+id/image_four"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/bank1"
-        android:paddingTop="30sp"
-        app:layout_constraintLeft_toRightOf="@+id/image_three"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_two" />
-
-    <ImageView
-        android:id="@+id/image_five"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/bank3"
-        android:paddingTop="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_three" />
-
-    <ImageView
-        android:id="@+id/image_six"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/bank4"
-        android:paddingTop="30sp"
-        app:layout_constraintLeft_toRightOf="@+id/image_five"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_four" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
