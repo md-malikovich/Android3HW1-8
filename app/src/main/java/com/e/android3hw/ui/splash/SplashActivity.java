@@ -30,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
             PreferenceHelper.setIsFirstLaunch();
             OnBoardActivity.start(this);
         }
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out); //TODO: anim
         finish();
     }
 }
