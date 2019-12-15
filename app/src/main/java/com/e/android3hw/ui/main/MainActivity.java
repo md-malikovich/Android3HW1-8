@@ -69,6 +69,23 @@ public class MainActivity extends AppCompatActivity {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
+    private void calFormat() {
+        Calendar calendarDay = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat day = new SimpleDateFormat("dd");
+        String formatted_day = day.format(calendarDay.getTime());
+        tvDay.setText(formatted_day);
+
+        Calendar calendarMonth = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat month = new SimpleDateFormat("MMMM");
+        String formatted_month = month.format(calendarMonth.getTime());
+        tvMonth.setText(formatted_month);
+
+        Calendar calendarYear = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat year = new SimpleDateFormat("YYYY");
+        String formatted_year = year.format(calendarYear.getTime());
+        tvYear.setText(formatted_year);
+    }
+
     private void fetchWeather() { //TODO: Получение данных
         RetrofitBuilder.getService()
                 .currentWeather("Bishkek","metric", getResources().getString(R.string.weather_key))
@@ -78,17 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                         if (response.isSuccessful() && response.body() != null) {
 
-                            Calendar calendar = Calendar.getInstance();
-                            int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-                            tvDay.setText(""+mDay);
-                            //int mMonth = calendar.get(Calendar.MONTH);
-                            //tvMonth.setText(""+mMonth); //TODO: Почему-то выходит 11 вместо 12???
-                            @SuppressLint("SimpleDateFormat") SimpleDateFormat month = new SimpleDateFormat("MMM");
-                            String month_name = month.format(calendar.getTime());
-                            tvMonth.setText(month_name);
-                            int mYear = calendar.get(Calendar.YEAR);
-                            tvYear.setText(""+mYear);
-
+                            calFormat();
                             tvCity.setText(response.body().getName().toString());
                             tvNow.setText("Now");
                             tvToday.setText("Today");
