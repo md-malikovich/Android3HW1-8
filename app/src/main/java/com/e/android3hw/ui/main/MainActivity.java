@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.e.android3hw.R;
@@ -15,7 +16,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
+    TextView tvDay, tvMonth, tvYear, tvCity, tvNow, tvToday, tvCurrentTemp, tvTodayMaxTemp, tvTodayMinTemp, tvWeatherDesc, tvMaxTemp, tvMinTemp;
+    TextView tvWind, tvWindIndex, tvHumidity, tvHumidityIndex, tvSunrise, tvSunriseIndex, tvAirQuality, tvAirQualityIndex;
+    TextView tvPressure, tvPressureIndex, tvCloudiness, tvCloudinessIndex, tvSunset, tvSunsetIndex, tvAirQuality2, tvAirQualityIndex2;
+    ImageView imgLocation, imgLittleCloud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initViews() {
-        textView = findViewById(R.id.textView_main);
+        //textView = findViewById(R.id.textView_main);
     }
 
     public static void start(Context context) {
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            textView.setText(response.body().getMain().getTempMax().toString());
+                            //textView.setText(response.body().getMain().getTempMax().toString());
                             //Toast.makeText(getApplicationContext(), response.code(), Toast.LENGTH_LONG).show();
                         }
                     }
