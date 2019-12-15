@@ -30,7 +30,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initViews() {
-        //textView = findViewById(R.id.textView_main);
+        imgLocation = findViewById(R.id.imgLocation);
+        imgLittleCloud = findViewById(R.id.imgLittleCloud);
+        tvDay = findViewById(R.id.tvDay);
+        tvMonth = findViewById(R.id.tvMonth);
+        tvYear = findViewById(R.id.tvYear);
+        tvCity = findViewById(R.id.tvCity);
+        tvNow = findViewById(R.id.tvNow);
+        tvToday = findViewById(R.id.tvToday);
+        tvCurrentTemp = findViewById(R.id.tvCurrentTemp);
+        tvTodayMaxTemp = findViewById(R.id.tvTodayMaxTemp);
+        tvTodayMinTemp = findViewById(R.id.tvTodayMinTemp);
+        tvWeatherDesc = findViewById(R.id.tvWeatherDesc);
+        tvMaxTemp = findViewById(R.id.tvMaxTemp);
+        tvMinTemp = findViewById(R.id.tvMinTemp);
+        tvWind = findViewById(R.id.tvWind);
+        tvWindIndex = findViewById(R.id.tvWindIndex);
+        tvHumidity = findViewById(R.id.tvHumidity);
+        tvHumidityIndex = findViewById(R.id.tvHumidityIndex);
+        tvSunrise = findViewById(R.id.tvSunrise);
+        tvSunriseIndex = findViewById(R.id.tvSunriseIndex);
+        tvAirQuality = findViewById(R.id.tvAirQuality);
+        tvAirQualityIndex = findViewById(R.id.tvAirQualityIndex);
+        tvPressure = findViewById(R.id.tvPressure);
+        tvPressureIndex = findViewById(R.id.tvPressureIndex);
+        tvCloudiness = findViewById(R.id.tvCloudiness);
+        tvCloudinessIndex = findViewById(R.id.tvCloudinessIndex);
+        tvSunset = findViewById(R.id.tvSunset);
+        tvSunsetIndex = findViewById(R.id.tvSunsetIndex);
+        tvAirQuality2 = findViewById(R.id.tvAirQuality2);
+        tvAirQualityIndex2 = findViewById(R.id.tvAirQualityIndex2);
     }
 
     public static void start(Context context) {
