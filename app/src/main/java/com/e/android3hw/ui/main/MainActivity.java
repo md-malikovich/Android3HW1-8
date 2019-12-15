@@ -1,6 +1,7 @@
 package com.e.android3hw.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import com.e.android3hw.R;
 import com.e.android3hw.data.RetrofitBuilder;
 import com.e.android3hw.data.entity.CurrentWeather;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,10 +73,50 @@ public class MainActivity extends AppCompatActivity {
         RetrofitBuilder.getService()
                 .currentWeather("Bishkek","metric", getResources().getString(R.string.weather_key))
                 .enqueue(new Callback<CurrentWeather>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                         if (response.isSuccessful() && response.body() != null) {
+
+                            Calendar calendar = Calendar.getInstance();
+                            int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+                            tvDay.setText(""+mDay);
+                            //int mMonth = calendar.get(Calendar.MONTH);
+                            //tvMonth.setText(""+mMonth); //TODO: Почему-то выходит 11 вместо 12???
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat month = new SimpleDateFormat("MMM");
+                            String month_name = month.format(calendar.getTime());
+                            tvMonth.setText(month_name);
+                            int mYear = calendar.get(Calendar.YEAR);
+                            tvYear.setText(""+mYear);
+
+                            tvCity.setText(response.body().getName().toString());
+                            tvNow.setText("Now");
+                            tvToday.setText("Today");
+                            tvCurrentTemp.setText(response.body().getMain().getTemp().toString());
+                            tvTodayMaxTemp.setText(response.body().getMain().getTempMax().toString());
+                            tvTodayMinTemp.setText(response.body().getMain().getTempMin().toString());
+                            tvWeatherDesc.setText("Little cloud");
+                            tvMaxTemp.setText("Max");
+                            tvMinTemp.setText("Min");
                             //textView.setText(response.body().getMain().getTempMax().toString());
+                            tvWind.setText("Wind");
+                            tvWindIndex.setText((response.body().getWind().getSpeed().toString()));
+                            tvHumidity.setText("Humidity");
+                            tvHumidityIndex.setText(response.body().getMain().getHumidity().toString());
+                            tvSunrise.setText("Sunrise");
+                            tvSunriseIndex.setText(response.body().getSys().getSunrise().toString());
+                            //tvSunriseIndex.setText("08:26");
+                            tvAirQuality.setText("Air Quality Index");
+                            tvAirQualityIndex.setText("N/a");
+                            tvPressure.setText("Pressure");
+                            tvPressureIndex.setText(response.body().getMain().getPressure().toString());
+                            tvCloudiness.setText("Cloudiness");
+                            tvCloudinessIndex.setText(response.body().getClouds().getAll().toString());
+                            tvSunset.setText("Sunset");
+                            tvSunsetIndex.setText(response.body().getSys().getSunset().toString());
+                            //tvSunsetIndex.setText("17:28");
+                            tvAirQuality2.setText("Air Quality");
+                            tvAirQualityIndex2.setText("N/a");
                             //Toast.makeText(getApplicationContext(), response.code(), Toast.LENGTH_LONG).show();
                         }
                     }

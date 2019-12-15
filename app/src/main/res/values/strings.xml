@@ -5,7 +5,8 @@
     <string name="malikovich">MALIKOVICH</string>
     <string name="btn_menu_skip">SKIP</string>
     <string name="btn_onBoard_next">NEXT</string>
-    <string name="bank_kompanion">Bank Kompanion</string>
+    <string name="appName">Weather App</string>
     <string name="btn_back">BACK</string>
     <string name="weather_key">4d63c1acf9a085448b23971128e5eddd</string>
+    <string name="tvBishkek">Bishkek</string>
 </resources>

@@ -65,11 +65,10 @@ public class OnBoardActivity extends AppCompatActivity {
 
     private ArrayList<OnBoardEntity> getResource(){
         ArrayList<OnBoardEntity> list = new ArrayList<>();
-        list.add(new OnBoardEntity( "Deposits",R.drawable.bank1));
-        list.add(new OnBoardEntity( "Money transfers",R.drawable.bank3));
-        list.add(new OnBoardEntity( "Deposits",R.drawable.bank1));
-        list.add(new OnBoardEntity( "Money transfers",R.drawable.bank3));
-        list.add(new OnBoardEntity( "Deposits",R.drawable.bank1));
+        list.add(new OnBoardEntity( "Rainy",R.drawable.weather11));
+        list.add(new OnBoardEntity( "Sunny",R.drawable.sun2));
+        list.add(new OnBoardEntity( "Cloudy",R.drawable.weather11));
+        list.add(new OnBoardEntity( "Snowy",R.drawable.snow2));
         return list;
     }
 

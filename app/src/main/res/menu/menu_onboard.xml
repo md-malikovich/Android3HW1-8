@@ -6,7 +6,7 @@
         android:id="@+id/skip"
         android:title="@string/btn_menu_skip"
         android:visible="true"
-
+        android:icon="@drawable/skip4"
         app:showAsAction="ifRoom"/>
 
 </menu>
