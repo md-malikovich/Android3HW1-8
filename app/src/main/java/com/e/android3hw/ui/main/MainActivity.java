@@ -86,39 +86,39 @@ public class MainActivity extends AppCompatActivity {
         tvYear.setText(formatted_year);
     }
 
-    private void fillViews(Response<CurrentWeather> response) {
+    private void fillViews(CurrentWeather response) {
         calFormat();
-        tvCity.setText(response.body().getName().toString());
+        tvCity.setText(response.getName().toString());
         tvNow.setText("Now");
         tvToday.setText("Today");
-        tvCurrentTemp.setText(response.body().getMain().getTemp().toString());
-        tvTodayMaxTemp.setText(response.body().getMain().getTempMax().toString());
-        tvTodayMinTemp.setText(response.body().getMain().getTempMin().toString());
+        tvCurrentTemp.setText(response.getMain().getTemp().toString());
+        tvTodayMaxTemp.setText(response.getMain().getTempMax().toString());
+        tvTodayMinTemp.setText(response.getMain().getTempMin().toString());
         tvWeatherDesc.setText("Little cloud");
         tvMaxTemp.setText("Max");
         tvMinTemp.setText("Min");
-        //textView.setText(response.body().getMain().getTempMax().toString());
+        //textView.setText(response.getMain().getTempMax().toString());
         tvWind.setText("Wind");
-        tvWindIndex.setText((response.body().getWind().getSpeed().toString()));
+        tvWindIndex.setText((response.getWind().getSpeed().toString()));
         tvHumidity.setText("Humidity");
-        tvHumidityIndex.setText(response.body().getMain().getHumidity().toString());
+        tvHumidityIndex.setText(response.getMain().getHumidity().toString());
         tvSunrise.setText("Sunrise");
-        tvSunriseIndex.setText(response.body().getSys().getSunrise().toString());
+        tvSunriseIndex.setText(response.getSys().getSunrise().toString());
         //tvSunriseIndex.setText("08:26");
         tvAirQuality.setText("Air Quality Index");
         tvAirQualityIndex.setText("N/a");
         tvPressure.setText("Pressure");
-        tvPressureIndex.setText(response.body().getMain().getPressure().toString());
+        tvPressureIndex.setText(response.getMain().getPressure().toString());
         tvCloudiness.setText("Cloudiness");
-        tvCloudinessIndex.setText(response.body().getClouds().getAll().toString());
+        tvCloudinessIndex.setText(response.getClouds().getAll().toString());
         tvSunset.setText("Sunset");
-        tvSunsetIndex.setText(response.body().getSys().getSunset().toString());
+        tvSunsetIndex.setText(response.getSys().getSunset().toString());
         //tvSunsetIndex.setText("17:28");
         tvAirQuality2.setText("Air Quality");
         tvAirQualityIndex2.setText("N/a");
     }
 
-    private void fetchWeather() { //TODO: Получение данных
+    private void fetchWeather() {
         RetrofitBuilder.getService()
                 .currentWeather("Bishkek","metric", getResources().getString(R.string.weather_key))
                 .enqueue(new Callback<CurrentWeather>() {
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            fillViews(response);
+                            fillViews(response.body());
                         }
                     }
 
