@@ -86,6 +86,38 @@ public class MainActivity extends AppCompatActivity {
         tvYear.setText(formatted_year);
     }
 
+    private void fillViews(Response<CurrentWeather> response) {
+        calFormat();
+        tvCity.setText(response.body().getName().toString());
+        tvNow.setText("Now");
+        tvToday.setText("Today");
+        tvCurrentTemp.setText(response.body().getMain().getTemp().toString());
+        tvTodayMaxTemp.setText(response.body().getMain().getTempMax().toString());
+        tvTodayMinTemp.setText(response.body().getMain().getTempMin().toString());
+        tvWeatherDesc.setText("Little cloud");
+        tvMaxTemp.setText("Max");
+        tvMinTemp.setText("Min");
+        //textView.setText(response.body().getMain().getTempMax().toString());
+        tvWind.setText("Wind");
+        tvWindIndex.setText((response.body().getWind().getSpeed().toString()));
+        tvHumidity.setText("Humidity");
+        tvHumidityIndex.setText(response.body().getMain().getHumidity().toString());
+        tvSunrise.setText("Sunrise");
+        tvSunriseIndex.setText(response.body().getSys().getSunrise().toString());
+        //tvSunriseIndex.setText("08:26");
+        tvAirQuality.setText("Air Quality Index");
+        tvAirQualityIndex.setText("N/a");
+        tvPressure.setText("Pressure");
+        tvPressureIndex.setText(response.body().getMain().getPressure().toString());
+        tvCloudiness.setText("Cloudiness");
+        tvCloudinessIndex.setText(response.body().getClouds().getAll().toString());
+        tvSunset.setText("Sunset");
+        tvSunsetIndex.setText(response.body().getSys().getSunset().toString());
+        //tvSunsetIndex.setText("17:28");
+        tvAirQuality2.setText("Air Quality");
+        tvAirQualityIndex2.setText("N/a");
+    }
+
     private void fetchWeather() { //TODO: Получение данных
         RetrofitBuilder.getService()
                 .currentWeather("Bishkek","metric", getResources().getString(R.string.weather_key))
@@ -94,37 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                         if (response.isSuccessful() && response.body() != null) {
-
-                            calFormat();
-                            tvCity.setText(response.body().getName().toString());
-                            tvNow.setText("Now");
-                            tvToday.setText("Today");
-                            tvCurrentTemp.setText(response.body().getMain().getTemp().toString());
-                            tvTodayMaxTemp.setText(response.body().getMain().getTempMax().toString());
-                            tvTodayMinTemp.setText(response.body().getMain().getTempMin().toString());
-                            tvWeatherDesc.setText("Little cloud");
-                            tvMaxTemp.setText("Max");
-                            tvMinTemp.setText("Min");
-                            //textView.setText(response.body().getMain().getTempMax().toString());
-                            tvWind.setText("Wind");
-                            tvWindIndex.setText((response.body().getWind().getSpeed().toString()));
-                            tvHumidity.setText("Humidity");
-                            tvHumidityIndex.setText(response.body().getMain().getHumidity().toString());
-                            tvSunrise.setText("Sunrise");
-                            tvSunriseIndex.setText(response.body().getSys().getSunrise().toString());
-                            //tvSunriseIndex.setText("08:26");
-                            tvAirQuality.setText("Air Quality Index");
-                            tvAirQualityIndex.setText("N/a");
-                            tvPressure.setText("Pressure");
-                            tvPressureIndex.setText(response.body().getMain().getPressure().toString());
-                            tvCloudiness.setText("Cloudiness");
-                            tvCloudinessIndex.setText(response.body().getClouds().getAll().toString());
-                            tvSunset.setText("Sunset");
-                            tvSunsetIndex.setText(response.body().getSys().getSunset().toString());
-                            //tvSunsetIndex.setText("17:28");
-                            tvAirQuality2.setText("Air Quality");
-                            tvAirQualityIndex2.setText("N/a");
-                            //Toast.makeText(getApplicationContext(), response.code(), Toast.LENGTH_LONG).show();
+                            fillViews(response);
                         }
                     }
 
