@@ -11,8 +11,13 @@ import android.widget.Toast;
 import com.e.android3hw.R;
 import com.e.android3hw.data.RetrofitBuilder;
 import com.e.android3hw.data.entity.CurrentWeather;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
         tvYear.setText(formatted_year);
     }
 
+    public String parseDateToTime(double time) {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Date date = new Date();
+        date.setTime((long) time * 1000);
+        return dateFormat.format(date.getTime());
+    }
+
     private void fillViews(CurrentWeather response) {
         calFormat();
         tvCity.setText(response.getName().toString());
@@ -103,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         tvHumidity.setText("Humidity");
         tvHumidityIndex.setText(response.getMain().getHumidity().toString());
         tvSunrise.setText("Sunrise");
-        tvSunriseIndex.setText(response.getSys().getSunrise().toString());
+        tvSunriseIndex.setText(parseDateToTime(response.getSys().getSunrise()));
         //tvSunriseIndex.setText("08:26");
         tvAirQuality.setText("Air Quality Index");
         tvAirQualityIndex.setText("N/a");
@@ -112,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         tvCloudiness.setText("Cloudiness");
         tvCloudinessIndex.setText(response.getClouds().getAll().toString());
         tvSunset.setText("Sunset");
-        tvSunsetIndex.setText(response.getSys().getSunset().toString());
+        tvSunsetIndex.setText(parseDateToTime(response.getSys().getSunset()));
         //tvSunsetIndex.setText("17:28");
         tvAirQuality2.setText("Air Quality");
         tvAirQualityIndex2.setText("N/a");
