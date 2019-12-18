@@ -20,7 +20,7 @@
     <dimen name="margin_top_16">16dp</dimen>
     <dimen name="margin_top_25">25dp</dimen>
 
-    <dimen name="margin_start_160">160dp</dimen>
+    <dimen name="margin_start_160">165dp</dimen>
     <dimen name="margin_start_8">8dp</dimen>
     <dimen name="margin_start_38">38dp</dimen>
     <dimen name="margin_start_34">34dp</dimen>

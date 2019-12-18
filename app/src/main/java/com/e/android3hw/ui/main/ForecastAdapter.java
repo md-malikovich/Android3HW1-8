@@ -7,14 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.e.android3hw.R;
 import com.e.android3hw.data.entity.CurrentWeather;
-import com.e.android3hw.data.entity.ForecastEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastViewHolder> {
 
-    private List<ForecastEntity> forecast = new ArrayList<>();
+    private List<CurrentWeather> weather = new ArrayList<>();
 
     @NonNull
     @Override
@@ -24,18 +22,18 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastViewHolder> {
         return new ForecastViewHolder(view);
     }
 
-    public void updateWeather (List<ForecastEntity> forecast) {
-        this.forecast = forecast;
+    public void updateWeather (List<CurrentWeather> forecastWeather) {
+        this.weather = forecastWeather;
         notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
-        holder.onBind(forecast.get(position));
+        holder.onBind(weather.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return forecast.size();
+        return weather.size();
     }
 }

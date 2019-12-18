@@ -14,23 +14,26 @@
 
     <TextView
         android:id="@+id/tvForecastDay"
-        tools:text="30"
-        android:textSize="@dimen/text_size_25"
+        tools:text="20"
+        android:textSize="15dp"
+        android:maxLength="3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tvForecastMaxTemp"
-        tools:text="30"
-        android:textSize="@dimen/text_size_25"
+        tools:text="20"
+        android:textSize="15dp"
         android:layout_marginTop="@dimen/margin_top_8"
+        android:maxLength="3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tvForecastMinTemp"
-        tools:text="30"
-        android:textSize="@dimen/text_size_25"
+        tools:text="20"
+        android:textSize="15dp"
+        android:maxLength="3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

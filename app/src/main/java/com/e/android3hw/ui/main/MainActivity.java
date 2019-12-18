@@ -7,12 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.e.android3hw.R;
 import com.e.android3hw.data.RetrofitBuilder;
 import com.e.android3hw.data.entity.CurrentWeather;
@@ -24,14 +19,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static com.e.android3hw.BuildConfig.API_KEY;
 
 public class MainActivity extends BaseActivity {
@@ -54,21 +48,23 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tvHumidityIndex) TextView tvHumidityIndex;
     @BindView(R.id.tvSunrise) TextView tvSunrise;
     @BindView(R.id.tvSunriseIndex) TextView tvSunriseIndex;
-    //@BindView(R.id.tvAirQuality) TextView tvAirQuality;
-    //@BindView(R.id.tvAirQualityIndex) TextView tvAirQualityIndex;
     @BindView(R.id.tvPressure) TextView tvPressure;
     @BindView(R.id.tvPressureIndex) TextView tvPressureIndex;
     @BindView(R.id.tvCloudiness) TextView tvCloudiness;
     @BindView(R.id.tvCloudinessIndex) TextView tvCloudinessIndex;
     @BindView(R.id.tvSunset) TextView tvSunset;
     @BindView(R.id.tvSunsetIndex) TextView tvSunsetIndex;
-    //@BindView(R.id.tvAirQuality2) TextView tvAirQuality2;
-    //@BindView(R.id.tvAirQualityIndex2) TextView tvAirQualityIndex2;
     @BindView(R.id.imgLocation) ImageView imgLocation;
     @BindView(R.id.imgLittleCloud) ImageView imgLittleCloud;
+    //@BindView(R.id.imgLittleCloud) static ImageView imgLittleCloud;
+    //private static ImageView imgLittleCloud;
+    //@BindView(R.id.tvAirQuality2) TextView tvAirQuality2;
+    //@BindView(R.id.tvAirQualityIndex2) TextView tvAirQualityIndex2;
+    //@BindView(R.id.tvAirQuality) TextView tvAirQuality;
+    //@BindView(R.id.tvAirQualityIndex) TextView tvAirQualityIndex;
 
-    RecyclerView recyclerView;
-    ForecastAdapter adapter;
+    private RecyclerView recyclerView;
+    private ForecastAdapter adapter;
 
     @Override
     protected int getLayoutId() {
@@ -85,8 +81,6 @@ public class MainActivity extends BaseActivity {
 
     public void initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(manager);
     }
 
     public void initForecastAdapter() {
@@ -94,8 +88,8 @@ public class MainActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void showForecastWeather(CurrentWeather weather) {
-        //adapter.updateWeather(weather.); //TODO: ???????????????????
+    private void showForecastWeather(List<CurrentWeather> weather) {
+        adapter.updateWeather(weather);
     }
 
     @OnClick(R.id.imgLittleCloud)
@@ -159,6 +153,8 @@ public class MainActivity extends BaseActivity {
         //tvAirQuality2.setText("Air Quality");
         //tvAirQualityIndex2.setText("N/a");
         //replaceFragment(R.id.container, new Fragment());
+//        Picasso.get().load("https://www.openweathermap.org/img/w/" + response.getWeather()
+//                .get(0).getIcon() + ".png").into(imgLittleCloud);
     }
 
     private void fetchWeather() {
@@ -170,7 +166,6 @@ public class MainActivity extends BaseActivity {
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             fillViews(response.body());
-                            //setIcon();
                         }
                     }
 
@@ -185,7 +180,9 @@ public class MainActivity extends BaseActivity {
                 .enqueue(new Callback<ForecastEntity>() {
                     @Override
                     public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
-                        tvTodayMaxTemp.setText((response.body().getList().get(1).getMain().getTempMax().toString()));
+                        if (response.isSuccessful() && response.body() != null) {
+                            showForecastWeather(response.body().getList());
+                        }
                     }
 
                     @Override
@@ -195,9 +192,3 @@ public class MainActivity extends BaseActivity {
                 });
     }
 }
-
-//    @SuppressLint("StringFormatMatches")
-//    private void setIcon(final CurrentWeather data) {
-//        Picasso.get().load("https://www.openweathermap.org/img/wn/" + data.getWeather()
-//                .get(0).getIcon() + ".png").into(imgLittleCloud);
-//    }

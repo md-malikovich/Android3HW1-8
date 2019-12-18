@@ -1,25 +1,22 @@
 package com.e.android3hw.ui.main;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.e.android3hw.R;
 import com.e.android3hw.data.entity.CurrentWeather;
-import com.e.android3hw.data.entity.ForecastEntity;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ForecastViewHolder extends RecyclerView.ViewHolder {
-
-    ForecastEntity forecastEntity;
 
     @BindView(R.id.imgForecastIcon) ImageView imgForecastIcon;
     @BindView(R.id.tvForecastDay) TextView tvForecastDay;
@@ -31,11 +28,16 @@ public class ForecastViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void onBind(ForecastEntity forecastEntity) {
-        tvForecastDay.setText((forecastEntity.getList().get(0).getDt_txt().toString()));
-        tvForecastMinTemp.setText((forecastEntity.getList().get(0).getMain().getTempMin().toString()));
-        tvForecastMaxTemp.setText((forecastEntity.getList().get(0).getMain().getTempMax().toString()));
-        Picasso.get().load("https://www.openweathermap.org/img/w/" + forecastEntity.getList().get(0)
-                .getWeather().get(0).getIcon() + ".png").into(imgForecastIcon);
+    public void onBind(CurrentWeather forecastEntity) {
+        tvForecastDay.setText((forecastEntity.getDt_txt()));
+        Calendar calendarDayForecast = Calendar.getInstance(); //TODO: позже вынести в отдельный класс!!!
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat day = new SimpleDateFormat("dd");
+        String formatted_day = day.format(calendarDayForecast.getTime());
+        tvForecastDay.setText(formatted_day);
+
+        tvForecastMinTemp.setText((forecastEntity.getMain().getTempMin().toString()));
+        tvForecastMaxTemp.setText((forecastEntity.getMain().getTempMax().toString()));
+        Picasso.get().load("https://www.openweathermap.org/img/w/" + forecastEntity.getWeather()
+                .get(0).getIcon() + ".png").into(imgForecastIcon);
     }
 }
