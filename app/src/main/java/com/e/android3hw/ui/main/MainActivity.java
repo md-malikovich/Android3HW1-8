@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity {
         tvTodayMaxTemp.setText((response.getMain().getTempMax().toString() + "º"));
         tvTodayMinTemp.setText((response.getMain().getTempMin().toString() + "º"));
         tvWeatherDesc.setText(("Little cloud"));
-        tvMaxTemp.setText(("Max");
+        tvMaxTemp.setText(("Max"));
         tvMinTemp.setText(("Min"));
         tvWind.setText(("Wind"));
         tvWindIndex.setText((response.getWind().getSpeed().toString() + " m/s"));
