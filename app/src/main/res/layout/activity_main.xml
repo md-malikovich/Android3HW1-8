@@ -50,7 +50,7 @@
         android:id="@+id/imgLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_40"
+        android:layout_marginTop="@dimen/margin_20"
         android:src="@drawable/ic_place_white_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDay"/>
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_16"
         tools:text="Bishkek"
-        android:layout_marginTop="@dimen/margin_top_40"
+        android:layout_marginTop="@dimen/margin_20"
         android:layout_marginStart="@dimen/margin_start_8"
         app:layout_constraintStart_toEndOf="@id/imgLocation"
         app:layout_constraintTop_toBottomOf="@+id/tvDay"/>
@@ -74,7 +74,7 @@
         android:focusable="true"
         android:onClick="onClickUpdate"
         android:src="@drawable/ic_update_24dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="86dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +103,7 @@
         style="@style/TextViewSmall"
         tools:text="Today"
         android:layout_marginTop="@dimen/margin_top_16"
-        android:layout_marginStart="@dimen/margin_start_90"
+        android:layout_marginStart="@dimen/margin_start_85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/imgLittleCloud"
@@ -124,7 +124,7 @@
         tools:text="28"
         style="@style/TextViewMiddle"
         android:layout_marginTop="@dimen/margin_top_14"
-        android:layout_marginStart="@dimen/margin_start_90"
+        android:layout_marginStart="@dimen/margin_start_85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvToday"
@@ -156,7 +156,7 @@
         tools:text="Max"
         style="@style/TextViewSmallRegular"
         android:layout_marginTop="@dimen/margin_top_4"
-        android:layout_marginStart="@dimen/margin_start_90"
+        android:layout_marginStart="@dimen/margin_start_85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvTodayMaxTemp"
@@ -178,12 +178,12 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        tools:listitem="@layout/item_forecast_weather"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tvWeatherDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_forecast_weather"
         tools:itemCount="5"/>
 
     <LinearLayout
