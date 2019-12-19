@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
 public class ForecastViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.imgForecastIcon) ImageView imgForecastIcon;
-    @BindView(R.id.tvForecastDay) TextView tvForecastDay;
+    @BindView(R.id.tvForecastDayTime) TextView tvForecastDayTime;
     @BindView(R.id.tvForecastMaxTemp)TextView tvForecastMaxTemp;
     @BindView(R.id.tvForecastMinTemp)TextView tvForecastMinTemp;
 
@@ -29,11 +30,12 @@ public class ForecastViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(CurrentWeather forecastEntity) {
-        tvForecastDay.setText((forecastEntity.getDt_txt()));
+        tvForecastDayTime.setText((forecastEntity.getDt_txt().toString()));
+        //tvForecastDayTime.setText((forecastEntity.getDt().toString()));
         Calendar calendarDayForecast = Calendar.getInstance(); //TODO: позже вынести в отдельный класс!!!
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat day = new SimpleDateFormat("dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat day = new SimpleDateFormat("dd-MMM \n HH:MM ", Locale.ENGLISH);
         String formatted_day = day.format(calendarDayForecast.getTime());
-        tvForecastDay.setText(formatted_day);
+        tvForecastDayTime.setText(formatted_day);
 
         tvForecastMinTemp.setText((forecastEntity.getMain().getTempMin().toString()));
         tvForecastMaxTemp.setText((forecastEntity.getMain().getTempMax().toString()));

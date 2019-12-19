@@ -13,10 +13,10 @@
         android:src="@drawable/ic_littlecloud"/>
 
     <TextView
-        android:id="@+id/tvForecastDay"
+        android:id="@+id/tvForecastDayTime"
         tools:text="20"
-        android:textSize="15dp"
-        android:maxLength="3"
+        android:textSize="10dp"
+        android:maxLines="2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
