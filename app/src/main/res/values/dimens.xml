@@ -50,6 +50,15 @@
     <dimen name="margin_top_50">50dp</dimen>
     <dimen name="height_30">30dp</dimen>
     <dimen name="width_90">90dp</dimen>
+    <dimen name="width_20">20dp</dimen>
+    <dimen name="margin_18dp">18dp</dimen>
+    <dimen name="width_25dp">25dp</dimen>
+    <dimen name="height_25dp">25dp</dimen>
+    <dimen name="margin_top_16dp">16dp</dimen>
+    <dimen name="width_50dp">50dp</dimen>
+    <dimen name="height_50dp">50dp</dimen>
+    <dimen name="margin_top_12dp">12dp</dimen>
+    <dimen name="text_size_15sp">15sp</dimen>
 
 
 </resources>

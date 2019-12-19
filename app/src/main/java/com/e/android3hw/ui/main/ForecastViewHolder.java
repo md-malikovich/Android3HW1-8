@@ -30,13 +30,12 @@ public class ForecastViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(CurrentWeather forecastEntity) {
-        tvForecastDayTime.setText((forecastEntity.getDt_txt().toString()));
-        //tvForecastDayTime.setText((forecastEntity.getDt().toString()));
+        tvForecastDayTime.setText((forecastEntity.getDt_txt()));
+        //tvForecastDayTime.setText((forecastEntity.getDt()));
         Calendar calendarDayForecast = Calendar.getInstance(); //TODO: позже вынести в отдельный класс!!!
         @SuppressLint("SimpleDateFormat") SimpleDateFormat day = new SimpleDateFormat("dd-MMM \n HH:MM ", Locale.ENGLISH);
         String formatted_day = day.format(calendarDayForecast.getTime());
         tvForecastDayTime.setText(formatted_day);
-
         tvForecastMinTemp.setText((forecastEntity.getMain().getTempMin().toString()));
         tvForecastMaxTemp.setText((forecastEntity.getMain().getTempMax().toString()));
         Picasso.get().load("https://www.openweathermap.org/img/w/" + forecastEntity.getWeather()

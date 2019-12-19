@@ -95,6 +95,7 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.imgLittleCloud)
     public void onClickUpdate(View view) {
         fetchWeather();
+
     }
 
     public static void start(Context context) {
@@ -108,7 +109,7 @@ public class MainActivity extends BaseActivity {
         tvDay.setText(formatted_day);
 
         Calendar calendarMonth = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat month = new SimpleDateFormat("MMMM");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat month = new SimpleDateFormat("MMMM", Locale.ENGLISH);
         String formatted_month = month.format(calendarMonth.getTime());
         tvMonth.setText(formatted_month);
 
@@ -153,8 +154,9 @@ public class MainActivity extends BaseActivity {
         //tvAirQuality2.setText("Air Quality");
         //tvAirQualityIndex2.setText("N/a");
         //replaceFragment(R.id.container, new Fragment());
-//        Picasso.get().load("https://www.openweathermap.org/img/w/" + response.getWeather()
-//                .get(0).getIcon() + ".png").into(imgLittleCloud);
+
+        Picasso.get().load("https://www.openweathermap.org/img/wn/" + response.getWeather()
+                .get(0).getIcon() + ".png").into(imgLittleCloud);
     }
 
     private void fetchWeather() {

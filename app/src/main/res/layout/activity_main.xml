@@ -48,8 +48,8 @@
 
     <ImageView
         android:id="@+id/imgLocation"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="@dimen/width_20"
+        android:layout_height="@dimen/width_20"
         android:layout_marginTop="@dimen/margin_20"
         android:src="@drawable/ic_place_white_24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,29 +61,29 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_16"
         tools:text="Bishkek"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/margin_18dp"
         android:layout_marginStart="@dimen/margin_start_8"
         app:layout_constraintStart_toEndOf="@id/imgLocation"
         app:layout_constraintTop_toBottomOf="@+id/tvDay"/>
 
     <ImageView
         android:id="@+id/imgUpdate"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/width_25dp"
+        android:layout_height="@dimen/height_25dp"
         android:clickable="true"
         android:focusable="true"
         android:onClick="onClickUpdate"
         android:src="@drawable/ic_update_24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_top_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgLittleCloud"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/width_50dp"
+        android:layout_height="@dimen/height_50dp"
         android:src="@drawable/ic_littlecolud"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/margin_top_12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLocation"/>
 
@@ -181,8 +181,7 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tvWeatherDesc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:itemCount="5"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <LinearLayout
         android:id="@+id/left"
