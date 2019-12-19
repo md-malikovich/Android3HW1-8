@@ -14,7 +14,6 @@ import com.e.android3hw.data.entity.CurrentWeather;
 import com.e.android3hw.data.entity.ForecastEntity;
 import com.e.android3hw.ui.base.BaseActivity;
 import com.squareup.picasso.Picasso;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
