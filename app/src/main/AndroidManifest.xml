@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.map.MapActivity"></activity>
+        <activity
+            android:name=".ui.map.MapActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
         <activity
             android:name=".ui.onboard.OnBoardActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -26,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
