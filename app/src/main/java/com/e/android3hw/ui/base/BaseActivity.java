@@ -24,11 +24,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void toast(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
-
-    protected void replaceFragment(int containerId, Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(containerId, fragment)
-                .commit();
-    }
 }
+
+//    protected void replaceFragment(int containerId, Fragment fragment) {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(containerId, fragment)
+//                .commit();
+//    }

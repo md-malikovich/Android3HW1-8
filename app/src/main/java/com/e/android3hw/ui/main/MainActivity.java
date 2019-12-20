@@ -13,6 +13,7 @@ import com.e.android3hw.data.RetrofitBuilder;
 import com.e.android3hw.data.entity.CurrentWeather;
 import com.e.android3hw.data.entity.ForecastEntity;
 import com.e.android3hw.ui.base.BaseActivity;
+import com.e.android3hw.ui.map.MapActivity;
 import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -94,7 +95,6 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.imgLittleCloud)
     public void onClickUpdate(View view) {
         fetchWeather();
-
     }
 
     public static void start(Context context) {
@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity {
         return dateFormat.format(date.getTime());
     }
 
-    private void fillViews(CurrentWeather response) {
+    private void fillViews(CurrentWeather response) { //TODO: вынести все в strings!!!
         calFormat();
         tvCity.setText(response.getName().toString());
         tvNow.setText(("Now"));
@@ -153,6 +153,7 @@ public class MainActivity extends BaseActivity {
         //tvAirQuality2.setText("Air Quality");
         //tvAirQualityIndex2.setText("N/a");
         //replaceFragment(R.id.container, new Fragment());
+        //tvWindIndex.setText(getString((R.string.wind_speed), 7)); //TODO: example!!!
 
         Picasso.get().load("https://www.openweathermap.org/img/wn/" + response.getWeather()
                 .get(0).getIcon() + ".png").into(imgLittleCloud);
@@ -191,5 +192,10 @@ public class MainActivity extends BaseActivity {
                         toast(t.getLocalizedMessage());
                     }
                 });
+    }
+
+    public void openMapActivity(View view) {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
     }
 }

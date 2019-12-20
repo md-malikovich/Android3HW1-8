@@ -9,4 +9,6 @@
     <string name="btn_back">BACK</string>
     <string name="weather_key">4d63c1acf9a085448b23971128e5eddd</string>
     <string name="tvBishkek">Bishkek</string>
+    <string name="wind_speed">%1d m/s</string>
+
 </resources>
