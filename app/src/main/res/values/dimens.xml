@@ -27,9 +27,10 @@
     <dimen name="margin_start_20">20dp</dimen>
     <dimen name="margin_start_50">50dp</dimen>
     <dimen name="margin_start_64">64dp</dimen>
-    <dimen name="margin_start_85">85dp</dimen>
+    <dimen name="margin_start_120">120dp</dimen>
     <dimen name="margin_top_120">120dp</dimen>
-    <dimen name="margin_start_170">170dp</dimen>
+    <dimen name="margin_start_220">220dp</dimen>
+    <dimen name="margin_start_85">85dp</dimen>
 
     <dimen name="margin_bottom_8">8dp</dimen>
 

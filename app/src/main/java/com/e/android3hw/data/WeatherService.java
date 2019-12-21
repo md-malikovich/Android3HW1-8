@@ -19,4 +19,9 @@ public interface WeatherService {
     Call<ForecastEntity> forecastWeather (@Query("q") String city,
                                           @Query("units") String metric,
                                           @Query("appid") String key);
+
+    @GET(FORECAST_WEATHER)
+    Call<ForecastEntity> mapCoord (@Query("lat") Double lat,
+                                   @Query("lon") Double lon,
+                                   @Query("appid") String key);
 }

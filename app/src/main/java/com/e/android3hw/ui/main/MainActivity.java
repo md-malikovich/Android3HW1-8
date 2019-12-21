@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.e.android3hw.R;
@@ -65,6 +66,8 @@ public class MainActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
     private ForecastAdapter adapter;
+    private ProgressBar progressBar;
+    private boolean isProgress = false;
 
     @Override
     protected int getLayoutId() {
@@ -77,6 +80,25 @@ public class MainActivity extends BaseActivity {
         fetchWeather();
         initRecyclerView();
         initForecastAdapter();
+        initViews();
+    }
+
+    public void initViews() {
+        progressBar = findViewById(R.id.progressBar);
+    }
+
+    protected void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideProgress() {
+        if(isProgress) {
+            progressBar.setVisibility(View.GONE);
+            isProgress = false;
+        } else {
+            isProgress = true;
+        }
+        progressBar.setVisibility(View.GONE);
     }
 
     public void initRecyclerView() {
@@ -192,10 +214,34 @@ public class MainActivity extends BaseActivity {
                         toast(t.getLocalizedMessage());
                     }
                 });
+
+        //Double lat =  // указать вместо city & metric
+        //Double lon =
+//        RetrofitBuilder.getService().mapCoord(35.0164, 139.0077, API_KEY).enqueue(new Callback<ForecastEntity>() {
+//                    @SuppressLint("SetTextI18n")
+//                    @Override
+//                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+//                        if (response.isSuccessful() && response.body() != null) {
+//                            //toast(response.body().getList().get(0).getSys().);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+//                        //toast(t.getLocalizedMessage());
+//                    }
+//                });
     }
 
     public void openMapActivity(View view) {
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
     }
+
+    //    private void getAndSetCoord(CurrentWeather response) {//TODO: получить Coord через Intent
+//        Double lat = 4.0;
+//        Double lon = 5.0;
+//        tvNow.setText(response.getCoord().setLat(lat));
+//        tvToday.setText(response.getCoord().setLon(lon));
+//    }
 }
