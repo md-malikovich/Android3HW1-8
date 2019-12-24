@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.android3hw.R;
+import com.e.android3hw.data.ForegroundService;
 import com.e.android3hw.ui.base.BaseActivity;
 import com.google.gson.JsonElement;
 import com.mapbox.geojson.Feature;
@@ -149,6 +151,30 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         super.onDestroy();
         mapView.onDestroy();
     }
+
+
+//    button.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            //NotificationHelper.createNotification(getApplicationContext(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+//        }
+//    });
+//
+//    btnStart.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
+//            startService(intent);
+//        }
+//    });
+//
+//    btnStop.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
+//            stopService(intent);
+//        }
+//    });
 }
 //Сделать по клику на карту получение координат и следом запустить диалог "Вы Уверены " (текст на ваше усмотрение)
 // если нажимает да то возвращаемся на Mainactivity и

@@ -256,7 +256,7 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            showWeatherByCoord(response.body().getList());
+                            //showWeatherByCoord(response.body().getList());
                         }
                     }
 
@@ -269,30 +269,30 @@ public class MainActivity extends BaseActivity {
 
     private void showWeatherByCoord(CurrentWeather response) { //TODO: вынести все в strings!!!
         calFormat();
-        tvCity.setText(response.getName().toString());
-        tvNow.setText(("Now"));
-        tvToday.setText(("Today"));
-        tvCurrentTemp.setText((response.getMain().getTemp().toString() + "º"));
-        tvTodayMaxTemp.setText((response.getMain().getTempMax().toString() + "º"));
-        tvTodayMinTemp.setText((response.getMain().getTempMin().toString() + "º"));
-        tvWeatherDesc.setText((response.getWeather().get(0).getDescription().toString()));
-        tvMaxTemp.setText(("Max"));
-        tvMinTemp.setText(("Min"));
-        tvWind.setText(("Wind"));
-        tvWindIndex.setText((response.getWind().getSpeed().toString() + " m/s"));
-        tvHumidity.setText(("Humidity"));
-        tvHumidityIndex.setText((response.getMain().getHumidity().toString() + "%"));
-        tvSunrise.setText(("Sunrise"));
-        tvSunriseIndex.setText(parseDateToTime(response.getSys().getSunrise()));
-        tvPressure.setText(("Pressure"));
-        tvPressureIndex.setText((response.getMain().getPressure().toString() + " mb"));
-        tvCloudiness.setText(("Cloudiness"));
-        tvCloudinessIndex.setText((response.getClouds().getAll().toString() + "%"));
-        tvSunset.setText(("Sunset"));
-        tvSunsetIndex.setText(parseDateToTime(response.getSys().getSunset()));
-
-        Picasso.get().load("https://www.openweathermap.org/img/wn/" + response.getWeather()
-                .get(0).getIcon() + ".png").into(imgLittleCloud);
+//        tvCity.setText(response.getName().toString());
+//        tvNow.setText(("Now"));
+//        tvToday.setText(("Today"));
+//        tvCurrentTemp.setText((response.getMain().getTemp().toString() + "º"));
+//        tvTodayMaxTemp.setText((response.getMain().getTempMax().toString() + "º"));
+//        tvTodayMinTemp.setText((response.getMain().getTempMin().toString() + "º"));
+//        tvWeatherDesc.setText((response.getWeather().get(0).getDescription().toString()));
+//        tvMaxTemp.setText(("Max"));
+//        tvMinTemp.setText(("Min"));
+//        tvWind.setText(("Wind"));
+//        tvWindIndex.setText((response.getWind().getSpeed().toString() + " m/s"));
+//        tvHumidity.setText(("Humidity"));
+//        tvHumidityIndex.setText((response.getMain().getHumidity().toString() + "%"));
+//        tvSunrise.setText(("Sunrise"));
+//        tvSunriseIndex.setText(parseDateToTime(response.getSys().getSunrise()));
+//        tvPressure.setText(("Pressure"));
+//        tvPressureIndex.setText((response.getMain().getPressure().toString() + " mb"));
+//        tvCloudiness.setText(("Cloudiness"));
+//        tvCloudinessIndex.setText((response.getClouds().getAll().toString() + "%"));
+//        tvSunset.setText(("Sunset"));
+//        tvSunsetIndex.setText(parseDateToTime(response.getSys().getSunset()));
+//
+//        Picasso.get().load("https://www.openweathermap.org/img/wn/" + response.getWeather()
+//                .get(0).getIcon() + ".png").into(imgLittleCloud);
     }
 
     public void openMapActivity(View view) {
