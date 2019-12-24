@@ -3,15 +3,18 @@ package com.e.android3hw.ui.map;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 
+import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.e.android3hw.R;
 import com.e.android3hw.ui.base.BaseActivity;
 import com.google.gson.JsonElement;
 import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -46,9 +49,6 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
     private Symbol symbol;
     private TextView tvMap;
 
-//    private static final LatLng locationFirst = new LatLng(34.035619, -118.224380);
-//    private static final LatLng locationSecond = new LatLng(33.986300, -118.184196);
-
     @Override
     protected int getLayoutId() {
         Mapbox.getInstance(this, MAPBOX_KEY);
@@ -76,43 +76,26 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
             map = mapboxMap;
             symbolManager = new SymbolManager(mapView, mapboxMap, style);
-
             symbolManager.addClickListener(symbol -> {
                 //
             });
 
-            map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
-                @Override
-                public boolean onMapClick(@NonNull LatLng point) {
-//                    LatLngBounds latLngBounds = new LatLngBounds.Builder()
-//                            .include(locationFirst)
-//                            .include(locationSecond)
-//                            .build();
-//                    createSymbol(point);
-
-                    PointF pixel = map.getProjection().toScreenLocation(point);
-                    List<Feature> features = map.queryRenderedFeatures(pixel, LatLng.CREATOR.toString());
-                    if (features.size() > 0) {
-                        Feature feature = features.get(0);
-
-                        if (feature.properties() != null) {
-                            for (Map.Entry<String, JsonElement> entry : feature.properties().entrySet()) {
-                                Log.d("ololo", String.format("%s = %s", entry.getKey(), entry.getValue()));
-                            }
-                        }
-                    }
-                    return true;
-                }
+            map.addOnMapLongClickListener(point -> {
+                createSymbol(point);
+                Double lat = point.getLatitude();
+                Double lng = point.getLongitude();
+                Coord coord = new Coord(lat, lng);
+                Intent intent = new Intent();
+                intent.putExtra("LatLng", coord);
+                setResult(RESULT_OK, intent);
+                //Log.d("ololo", "intent");
+                Log.d("ololo", coord.lat.toString());
+                Log.d("ololo", coord.lng.toString());
+                finish();
+                return true;
             });
         });
-
     }
-
-//    @Override
-//    public void onMapClick(@NonNull LatLng point) {
-//
-//
-//    }
 
     private void createSymbol(LatLng latLng) {
         SymbolOptions symbolOptions = new SymbolOptions()
@@ -167,8 +150,6 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         mapView.onDestroy();
     }
 }
-
-
 //Сделать по клику на карту получение координат и следом запустить диалог "Вы Уверены " (текст на ваше усмотрение)
 // если нажимает да то возвращаемся на Mainactivity и
 // загружаем погоду current и forecast по координатам и соответственно меняем город на тот который вернет нам openweatgermap в json'ке

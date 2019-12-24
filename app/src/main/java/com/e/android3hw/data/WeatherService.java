@@ -22,6 +22,7 @@ public interface WeatherService {
 
     @GET(FORECAST_WEATHER)
     Call<ForecastEntity> mapCoord (@Query("lat") Double lat,
-                                   @Query("lon") Double lon,
+                                   @Query("lon") Double lng,
+                                   @Query("units") String metric,
                                    @Query("appid") String key);
 }
