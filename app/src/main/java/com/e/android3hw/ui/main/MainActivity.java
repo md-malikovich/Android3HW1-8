@@ -260,6 +260,69 @@ public class MainActivity extends BaseActivity {
                 });
     }
 
+//    private void fetchCurrentWeatherByCoord(Double lat, Double lng) {
+//        calFormat();
+//        RetrofitBuilder.getService()
+//                .mapCoord(lat, lng, "metric", API_KEY)
+//                .enqueue(new Callback<ForecastEntity>() {
+//                    @SuppressLint("SetTextI18n")
+//                    @Override
+//                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+//                        if (response.isSuccessful() && response.body() != null) {
+//                            calFormat();
+//                            //fillViews(response.body());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+//                        toast(t.getLocalizedMessage());
+//                    }
+//                });
+//    }
+
+//    private void fetchForecastWeatherByCoord(Double lat, Double lng) {
+//        calFormat();
+//        RetrofitBuilder.getService()
+//                .mapCoord(lat, lng, "metric", API_KEY)
+//                .enqueue(new Callback<ForecastEntity>() {
+//                    @SuppressLint("SetTextI18n")
+//                    @Override
+//                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+//                        if (response.isSuccessful() && response.body() != null) {
+//                            showForecastWeather(response.body().getList());
+//                            calFormat();
+//                            //tvCity.setText(response.body().getList().get(0).getName());
+//                            tvNow.setText(("Now"));
+//                            tvToday.setText(("Today"));
+//                            tvCurrentTemp.setText((response.body().list.get(0).getMain().getTemp().toString() + "º"));
+//                            tvTodayMaxTemp.setText((response.body().list.get(0).getMain().getTempMax().toString() + "º"));
+//                            tvTodayMinTemp.setText((response.body().list.get(0).getMain().getTempMin().toString() + "º"));
+//                            tvWeatherDesc.setText((response.body().list.get(0).getWeather().get(0).getDescription().toString()));
+//                            tvMaxTemp.setText(("Max"));
+//                            tvMinTemp.setText(("Min"));
+//                            tvWind.setText(("Wind"));
+//                            tvWindIndex.setText((response.body().list.get(0).getWind().getSpeed().toString() + " m/s"));
+//                            tvHumidity.setText(("Humidity"));
+//                            tvHumidityIndex.setText((response.body().list.get(0).getMain().getHumidity().toString() + "%"));
+//                            tvSunrise.setText(("Sunrise"));
+//                            //tvSunriseIndex.setText(parseDateToTime(response.body().list.get(0).getSys().getSunrise()));
+//                            tvPressure.setText(("Pressure"));
+//                            tvPressureIndex.setText((response.body().list.get(0).getMain().getPressure().toString() + " mb"));
+//                            tvCloudiness.setText(("Cloudiness"));
+//                            tvCloudinessIndex.setText((response.body().list.get(0).getClouds().getAll().toString() + "%"));
+//                            tvSunset.setText(("Sunset"));
+//                            //tvSunsetIndex.setText(parseDateToTime(response.body().list.get(0).getSys().getSunset()));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+//                        toast(t.getLocalizedMessage());
+//                    }
+//                });
+//    }
+
     public void openMapActivity(View view) {
         Intent intent = new Intent(this, MapActivity.class);
         startActivityForResult(intent, REQUEST_CODE);
@@ -274,7 +337,8 @@ public class MainActivity extends BaseActivity {
                 Double lat = coord.getLat();
                 Double lng = coord.getLng();
                 fetchWeatherByCoord(lat, lng);
-                
+//                fetchCurrentWeatherByCoord(lat, lng);
+//                fetchForecastWeatherByCoord(lat, lng);
             }
         }
     }
