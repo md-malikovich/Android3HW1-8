@@ -4,11 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.e.android3hw.R;
@@ -18,7 +18,6 @@ import com.e.android3hw.data.entity.ForecastEntity;
 import com.e.android3hw.ui.base.BaseActivity;
 import com.e.android3hw.ui.map.Coord;
 import com.e.android3hw.ui.map.MapActivity;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,64 +38,35 @@ public class MainActivity extends BaseActivity {
     public Double lat;
     public Double lng;
 
-    @BindView(R.id.tvDay)
-    TextView tvDay;
-    @BindView(R.id.tvMonth)
-    TextView tvMonth;
-    @BindView(R.id.tvYear)
-    TextView tvYear;
-    @BindView(R.id.tvCity)
-    TextView tvCity;
-    @BindView(R.id.tvNow)
-    TextView tvNow;
-    @BindView(R.id.tvToday)
-    TextView tvToday;
-    @BindView(R.id.tvCurrentTemp)
-    TextView tvCurrentTemp;
-    @BindView(R.id.tvTodayMaxTemp)
-    TextView tvTodayMaxTemp;
-    @BindView(R.id.tvTodayMinTemp)
-    TextView tvTodayMinTemp;
-    @BindView(R.id.tvWeatherDesc)
-    TextView tvWeatherDesc;
-    @BindView(R.id.tvMaxTemp)
-    TextView tvMaxTemp;
-    @BindView(R.id.tvMinTemp)
-    TextView tvMinTemp;
-    @BindView(R.id.tvWind)
-    TextView tvWind;
-    @BindView(R.id.tvWindIndex)
-    TextView tvWindIndex;
-    @BindView(R.id.tvHumidity)
-    TextView tvHumidity;
-    @BindView(R.id.tvHumidityIndex)
-    TextView tvHumidityIndex;
-    @BindView(R.id.tvSunrise)
-    TextView tvSunrise;
-    @BindView(R.id.tvSunriseIndex)
-    TextView tvSunriseIndex;
-    @BindView(R.id.tvPressure)
-    TextView tvPressure;
-    @BindView(R.id.tvPressureIndex)
-    TextView tvPressureIndex;
-    @BindView(R.id.tvCloudiness)
-    TextView tvCloudiness;
-    @BindView(R.id.tvCloudinessIndex)
-    TextView tvCloudinessIndex;
-    @BindView(R.id.tvSunset)
-    TextView tvSunset;
-    @BindView(R.id.tvSunsetIndex)
-    TextView tvSunsetIndex;
-    @BindView(R.id.imgLocation)
-    ImageView imgLocation;
-    @BindView(R.id.imgLittleCloud)
-    ImageView imgLittleCloud;
+    @BindView(R.id.tvDay) TextView tvDay;
+    @BindView(R.id.tvMonth) TextView tvMonth;
+    @BindView(R.id.tvYear) TextView tvYear;
+    @BindView(R.id.tvCity) TextView tvCity;
+    @BindView(R.id.tvNow) TextView tvNow;
+    @BindView(R.id.tvToday) TextView tvToday;
+    @BindView(R.id.tvCurrentTemp) TextView tvCurrentTemp;
+    @BindView(R.id.tvTodayMaxTemp) TextView tvTodayMaxTemp;
+    @BindView(R.id.tvTodayMinTemp) TextView tvTodayMinTemp;
+    @BindView(R.id.tvWeatherDesc) TextView tvWeatherDesc;
+    @BindView(R.id.tvMaxTemp) TextView tvMaxTemp;
+    @BindView(R.id.tvMinTemp) TextView tvMinTemp;
+    @BindView(R.id.tvWind) TextView tvWind;
+    @BindView(R.id.tvWindIndex) TextView tvWindIndex;
+    @BindView(R.id.tvHumidity) TextView tvHumidity;
+    @BindView(R.id.tvHumidityIndex) TextView tvHumidityIndex;
+    @BindView(R.id.tvSunrise) TextView tvSunrise;
+    @BindView(R.id.tvSunriseIndex) TextView tvSunriseIndex;
+    @BindView(R.id.tvPressure) TextView tvPressure;
+    @BindView(R.id.tvPressureIndex) TextView tvPressureIndex;
+    @BindView(R.id.tvCloudiness) TextView tvCloudiness;
+    @BindView(R.id.tvCloudinessIndex) TextView tvCloudinessIndex;
+    @BindView(R.id.tvSunset) TextView tvSunset;
+    @BindView(R.id.tvSunsetIndex) TextView tvSunsetIndex;
+    @BindView(R.id.imgLocation) ImageView imgLocation;
+    @BindView(R.id.imgLittleCloud) ImageView imgLittleCloud;
+    @BindView(R.id.imgSend) ImageView imgSend;
     //@BindView(R.id.imgLittleCloud) static ImageView imgLittleCloud;
     //private static ImageView imgLittleCloud;
-    //@BindView(R.id.tvAirQuality2) TextView tvAirQuality2;
-    //@BindView(R.id.tvAirQualityIndex2) TextView tvAirQualityIndex2;
-    //@BindView(R.id.tvAirQuality) TextView tvAirQuality;
-    //@BindView(R.id.tvAirQualityIndex) TextView tvAirQualityIndex;
 
     private RecyclerView recyclerView;
     private ForecastAdapter adapter;
@@ -111,7 +81,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fetchWeather();
+        fetchCurrentWeather();
+        fetchForecastWeather();
+
         initRecyclerView();
         initForecastAdapter();
         initViews();
@@ -150,7 +122,8 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.imgLittleCloud)
     public void onClickUpdate(View view) {
-        fetchWeather();
+        fetchCurrentWeather();
+        fetchForecastWeather();
     }
 
     public static void start(Context context) {
@@ -181,15 +154,15 @@ public class MainActivity extends BaseActivity {
         return dateFormat.format(date.getTime());
     }
 
-    private void fillViews(CurrentWeather response) { //TODO: вынести все в strings!!!
+    private void fillViews(CurrentWeather response) { //TODO: вынести все в strings - tvWindIndex.setText(getString((R.string.wind_speed), 7));
         calFormat();
-        tvCity.setText(response.getName().toString());
+        tvCity.setText(response.getName());
         tvNow.setText(("Now"));
         tvToday.setText(("Today"));
         tvCurrentTemp.setText((response.getMain().getTemp().toString() + "º"));
         tvTodayMaxTemp.setText((response.getMain().getTempMax().toString() + "º"));
         tvTodayMinTemp.setText((response.getMain().getTempMin().toString() + "º"));
-        tvWeatherDesc.setText((response.getWeather().get(0).getDescription().toString()));
+        tvWeatherDesc.setText((response.getWeather().get(0).getDescription()));
         tvMaxTemp.setText(("Max"));
         tvMinTemp.setText(("Min"));
         tvWind.setText(("Wind"));
@@ -198,24 +171,17 @@ public class MainActivity extends BaseActivity {
         tvHumidityIndex.setText((response.getMain().getHumidity().toString() + "%"));
         tvSunrise.setText(("Sunrise"));
         tvSunriseIndex.setText(parseDateToTime(response.getSys().getSunrise()));
-        //tvAirQuality.setText("Air Quality Index");
-        //tvAirQualityIndex.setText("N/a");
         tvPressure.setText(("Pressure"));
         tvPressureIndex.setText((response.getMain().getPressure().toString() + " mb"));
         tvCloudiness.setText(("Cloudiness"));
         tvCloudinessIndex.setText((response.getClouds().getAll().toString() + "%"));
         tvSunset.setText(("Sunset"));
         tvSunsetIndex.setText(parseDateToTime(response.getSys().getSunset()));
-        //tvAirQuality2.setText("Air Quality");
-        //tvAirQualityIndex2.setText("N/a");
-        //replaceFragment(R.id.container, new Fragment());
-        //tvWindIndex.setText(getString((R.string.wind_speed), 7)); //TODO: example!!!
-
         Picasso.get().load("https://www.openweathermap.org/img/wn/" + response.getWeather()
                 .get(0).getIcon() + ".png").into(imgLittleCloud);
     }
 
-    private void fetchWeather() {
+    private void fetchCurrentWeather() {
         RetrofitBuilder.getService()
                 .currentWeather("Bishkek", "metric", API_KEY)
                 .enqueue(new Callback<CurrentWeather>() {
@@ -232,7 +198,9 @@ public class MainActivity extends BaseActivity {
                         toast(t.getLocalizedMessage());
                     }
                 });
+    }
 
+    private void fetchForecastWeather() {
         RetrofitBuilder.getService()
                 .forecastWeather("Bishkek", "metric", API_KEY)
                 .enqueue(new Callback<ForecastEntity>() {
@@ -306,8 +274,16 @@ public class MainActivity extends BaseActivity {
                 Double lat = coord.getLat();
                 Double lng = coord.getLng();
                 fetchWeatherByCoord(lat, lng);
+                
             }
         }
+    }
+
+    public void onClickSendNotification(View view) {
+        imgSend.setOnClickListener(v -> {
+            //NotificationHelper.createNotification(getApplicationContext(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+            Log.d("ololo", "Send notification");
+        });
     }
 }
 

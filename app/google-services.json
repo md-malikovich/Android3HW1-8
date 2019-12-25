@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "36611969467",
+    "firebase_url": "https://android3hw-cb6cc.firebaseio.com",
+    "project_id": "android3hw-cb6cc",
+    "storage_bucket": "android3hw-cb6cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36611969467:android:4536f7acfaac23cabaf49e",
+        "android_client_info": {
+          "package_name": "com.e.android3hw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36611969467-lfjf9b85ius570vtdusgejbannj32vjc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.android3hw",
+            "certificate_hash": "4790b5c30f9d49d31955f598a1c61c82e6da6231"
+          }
+        },
+        {
+          "client_id": "36611969467-ejh3j26ppgu0u9tkal3k8rsgetnbioip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMyS0OiCqug_NoR_fvN1x8qWPdo21GS1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36611969467-ejh3j26ppgu0u9tkal3k8rsgetnbioip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

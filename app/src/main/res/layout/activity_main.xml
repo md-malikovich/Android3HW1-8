@@ -91,6 +91,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/imgSend"
+        android:layout_width="@dimen/width_25dp"
+        android:layout_height="@dimen/height_25dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onClickSendNotification"
+        android:src="@drawable/ic_mail_24dp"
+        android:layout_marginTop="@dimen/margin_top_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgUpdate"
+        tools:ignore="OnClick" />
+
+
+    <ImageView
         android:id="@+id/imgLittleCloud"
         android:layout_width="@dimen/width_50dp"
         android:layout_height="@dimen/height_50dp"

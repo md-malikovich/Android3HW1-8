@@ -1,47 +1,27 @@
 package com.e.android3hw.ui.map;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
-
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.e.android3hw.R;
 import com.e.android3hw.data.ForegroundService;
 import com.e.android3hw.ui.base.BaseActivity;
-import com.google.gson.JsonElement;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolClickListener;
-import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolLongClickListener;
 import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
-
 import static com.e.android3hw.BuildConfig.MAPBOX_KEY;
-import static com.mapbox.mapboxsdk.style.layers.Property.ICON_ROTATION_ALIGNMENT_VIEWPORT;
 
 public class MapActivity extends BaseActivity implements OnMapReadyCallback {
 
@@ -50,6 +30,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
     SymbolManager symbolManager;
     private Symbol symbol;
     private TextView tvMap;
+    private Boolean isStarted = false;                                                              //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     @Override
     protected int getLayoutId() {
@@ -63,6 +44,19 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         initViews();
         initMap();
         mapView.onCreate(savedInstanceState);
+
+        FloatingActionButton fab = findViewById(R.id.fab);                                          //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        fab.setOnClickListener(view -> {
+//            if (isStarted) {
+                Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
+                startService(intent);
+//                Log.d("ololo", "Start!");
+//            } else {
+//                Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
+//                stopService(intent);
+//                Log.d("ololo", "Stop");
+//            }
+        });
     }
 
     private void initMap() {
@@ -75,7 +69,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+        mapboxMap.setStyle(Style.DARK, style -> {
             map = mapboxMap;
             symbolManager = new SymbolManager(mapView, mapboxMap, style);
             symbolManager.addClickListener(symbol -> {
@@ -84,16 +78,22 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
 
             map.addOnMapLongClickListener(point -> {
                 createSymbol(point);
-                Double lat = point.getLatitude();
-                Double lng = point.getLongitude();
-                Coord coord = new Coord(lat, lng);
-                Intent intent = new Intent();
-                intent.putExtra("LatLng", coord);
-                setResult(RESULT_OK, intent);
-                //Log.d("ololo", "intent");
-                Log.d("ololo", coord.lat.toString());
-                Log.d("ololo", coord.lng.toString());
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                builder.setTitle("Hello!").setMessage("Do you want to choose this coordinates?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            Double lat = point.getLatitude();
+                            Double lng = point.getLongitude();
+                            Coord coord = new Coord(lat, lng);
+                            Intent intent = new Intent();
+                            intent.putExtra("LatLng", coord);
+                            setResult(RESULT_OK, intent);
+                            //Log.d("ololo", "intent");
+                            Log.d("ololo", coord.lat.toString());
+                            Log.d("ololo", coord.lng.toString());
+                            finish();
+                        }).setNegativeButton("Нет", (dialog, which) -> dialog.cancel());
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 return true;
             });
         });
@@ -103,7 +103,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         SymbolOptions symbolOptions = new SymbolOptions()
                 .withLatLng(latLng)
                 .withIconImage("icon");
-        if(symbol != null) symbolManager.delete(symbol);
+        if (symbol != null) symbolManager.delete(symbol);
         symbol = symbolManager.create(symbolOptions);
 
         map.getStyle().addImageAsync("icon", Objects.requireNonNull(BitmapUtils.getBitmapFromDrawable(
@@ -151,33 +151,4 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         super.onDestroy();
         mapView.onDestroy();
     }
-
-
-//    button.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            //NotificationHelper.createNotification(getApplicationContext(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
-//        }
-//    });
-//
-//    btnStart.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
-//            startService(intent);
-//        }
-//    });
-//
-//    btnStop.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Intent intent = new Intent(getApplicationContext(), ForegroundService.class);
-//            stopService(intent);
-//        }
-//    });
 }
-//Сделать по клику на карту получение координат и следом запустить диалог "Вы Уверены " (текст на ваше усмотрение)
-// если нажимает да то возвращаемся на Mainactivity и
-// загружаем погоду current и forecast по координатам и соответственно меняем город на тот который вернет нам openweatgermap в json'ке
-//Активити с картой открывается по клику на значок возле названия города
-//<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

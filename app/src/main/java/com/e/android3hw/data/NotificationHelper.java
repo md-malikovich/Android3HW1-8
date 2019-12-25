@@ -9,10 +9,10 @@ import android.content.Intent;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import com.e.android3hw.R;
 import com.e.android3hw.ui.main.MainActivity;
 import com.e.android3hw.ui.map.MapActivity;
+
 
 public class NotificationHelper {
 
@@ -22,20 +22,20 @@ public class NotificationHelper {
     public static Notification createNotification(Context context, String title, String body) {
         createNotificationChannel(context);
 
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, MapActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, 0);
 
         Intent intent2 = new Intent(context, MapActivity.class);
         PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 1, intent2, 0);
 
         return new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.drawable.ic_gps_24dp)
                 .setContentTitle(title)
                 .setContentIntent(pendingIntent)
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .addAction(R.drawable.ic_launcher_background, "Button", pendingIntent2)
+                .addAction(R.drawable.ic_location, "Go to map!", pendingIntent2)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
     }

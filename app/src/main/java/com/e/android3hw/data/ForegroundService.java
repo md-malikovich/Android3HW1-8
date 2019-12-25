@@ -3,10 +3,10 @@ package com.e.android3hw.data;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-
 import androidx.annotation.Nullable;
 
 public class ForegroundService extends Service {
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -15,7 +15,7 @@ public class ForegroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        startForeground(1, NotificationHelper.createNotification(getApplicationContext(), "title", "body"));
+        startForeground(1, NotificationHelper.createNotification(getApplicationContext(), "Foreground Notification", "Description"));
         return START_STICKY;
     }
 }
